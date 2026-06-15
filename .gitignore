@@ -1,0 +1,21 @@
+﻿# 系统文件
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 临时文件
+*.tmp
+*.temp
+~$*
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/

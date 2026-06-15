@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>味庐 | 用心做好每一餐</title>
+<style>
+:root{--color-primary:#d4844a;--color-primary-dark:#b56735;--color-primary-light:#e8a87c;--color-bg:#fef9f2;--color-white:#fff;--color-card:#fff8f0;--color-text:#3d2b1f;--color-text-light:#8b6f5e;--color-border:#f0e4d8;--font-serif:Georgia,"Times New Roman","Noto Serif SC",KaiTi,serif;--font-sans:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;--max-width:1100px;--nav-height:72px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--font-sans);color:var(--color-text);background:var(--color-bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 24px}
+.section-padding{padding:100px 24px}
+.section-title{font-family:var(--font-serif);font-size:2.2rem;font-weight:400;text-align:center;margin-bottom:12px}
+.section-subtitle{text-align:center;color:var(--color-text-light);font-size:1.05rem;margin-bottom:56px}
+.navbar{position:fixed;top:0;left:0;right:0;height:var(--nav-height);display:flex;align-items:center;justify-content:space-between;padding:0 32px;z-index:1000;transition:background .35s,box-shadow .35s}
+.navbar.scrolled{background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+.nav-logo{font-family:var(--font-serif);font-size:1.5rem;letter-spacing:.04em;color:#fff;transition:color .35s}
+.navbar.scrolled .nav-logo{color:var(--color-text)}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:.92rem;letter-spacing:.03em;color:#fff;transition:color .2s;position:relative}
+.navbar.scrolled .nav-links a{color:var(--color-text)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--color-primary);transition:width .2s}
+.nav-links a:hover::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all .2s}
+.navbar.scrolled .hamburger span{background:var(--color-text)}
+.hero{height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:linear-gradient(135deg,rgba(60,30,15,.55),rgba(40,18,8,.75)),linear-gradient(to bottom right,#6b3a2a,#3d1f14 40%,#5a3020);color:#fff}
+.hero-content{position:relative;z-index:1;padding:0 24px;max-width:680px}
+.hero-tagline{font-family:var(--font-serif);font-size:.95rem;letter-spacing:.15em;text-transform:uppercase;color:var(--color-primary-light);margin-bottom:20px}
+.hero-title{font-family:var(--font-serif);font-size:3.8rem;font-weight:400;line-height:1.15;margin-bottom:20px;letter-spacing:.03em}
+.hero-desc{font-size:1.1rem;color:rgba(255,255,255,.8);margin-bottom:40px;line-height:1.8}
+.btn{display:inline-block;padding:14px 40px;font-family:var(--font-sans);font-size:.92rem;letter-spacing:.05em;border:1.5px solid var(--color-primary-light);color:#fff;background:transparent;cursor:pointer;border-radius:2px;transition:all .2s}
+.btn:hover{background:var(--color-primary);border-color:var(--color-primary)}
+.menu{background:var(--color-white)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:var(--max-width);margin:0 auto;padding:0 24px}
+.menu-card{background:var(--color-card);border-radius:6px;overflow:hidden;transition:transform .35s,box-shadow .35s;border:1px solid var(--color-border)}
+.menu-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(180,120,60,.12)}
+.menu-card-image{height:180px;display:flex;align-items:center;justify-content:center;font-size:2.8rem}
+.menu-card-body{padding:24px}
+.menu-card-name{font-family:var(--font-serif);font-size:1.2rem;margin-bottom:6px}
+.menu-card-desc{font-size:.88rem;color:var(--color-text-light);margin-bottom:14px;line-height:1.6}
+.menu-card-price{font-family:var(--font-serif);font-size:1.15rem;color:var(--color-primary-dark)}
+.contact{background:var(--color-card)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:var(--max-width);margin:0 auto;padding:0 24px}
+.contact-card{text-align:center;padding:36px 24px}
+.contact-icon{font-size:2.2rem;margin-bottom:16px}
+.contact-card h3{font-family:var(--font-serif);font-size:1.1rem;font-weight:400;margin-bottom:10px}
+.contact-card p{font-size:.92rem;color:var(--color-text-light);line-height:1.8}
+.footer{background:var(--color-text);color:rgba(255,255,255,.55);text-align:center;padding:36px 24px;font-size:.85rem}
+.footer-brand{font-family:var(--font-serif);font-size:1.1rem;color:var(--color-primary-light);margin-bottom:8px}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{position:fixed;top:0;right:-100%;width:260px;height:100vh;flex-direction:column;background:var(--color-white);padding:100px 32px 40px;gap:28px;transition:right .35s;box-shadow:-4px 0 30px rgba(0,0,0,.1)}.nav-links.active{right:0}.nav-links a{color:var(--color-text)!important;font-size:1.05rem}.hamburger{display:flex;z-index:1001}.hero-title{font-size:2.4rem}.hero-desc{font-size:1rem}.menu-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr;gap:12px}.section-padding{padding:72px 24px}.section-title{font-size:1.8rem}}
+@media(max-width:480px){.hero-title{font-size:2rem}.navbar{padding:0 20px}.btn{padding:12px 32px;font-size:.85rem}}
+</style>
+</head>
+<body>
+<nav class="navbar"><a href="#" class="nav-logo">味 庐</a><ul class="nav-links"><li><a href="#home">首页</a></li><li><a href="#menu">菜品</a></li><li><a href="#contact">联系</a></li></ul><button class="hamburger" aria-label="菜单"><span></span><span></span><span></span></button></nav>
+<section class="hero" id="home"><div class="hero-content"><p class="hero-tagline">Est. 2015 · 用心烹饪</p><h1 class="hero-title">味 庐</h1><p class="hero-desc">精选时令食材，融合东方烹饪美学<br>在温暖的灯光下，享受一顿有温度的饭</p><a href="#menu" class="btn">查看菜品</a></div></section>
+<section class="menu section-padding" id="menu"><div class="container"><h2 class="section-title fade-in">招牌菜品</h2><p class="section-subtitle fade-in">主厨精选，每一道都是心意</p><div class="menu-grid"><div class="menu-card fade-in"><div class="menu-card-image">🍖</div><div class="menu-card-body"><h3 class="menu-card-name">红烧牛腩煲</h3><p class="menu-card-desc">慢炖四小时，牛腩酥烂入味，搭配秘制酱汁</p><p class="menu-card-price">¥20</p></div></div><div class="menu-card fade-in"><div class="menu-card-image">🐟</div><div class="menu-card-body"><h3 class="menu-card-name">清蒸鲈鱼</h3><p class="menu-card-desc">每日鲜运，清蒸保留原味，葱油提香</p><p class="menu-card-price">¥128</p></div></div><div class="menu-card fade-in"><div class="menu-card-image">🥬</div><div class="menu-card-body"><h3 class="menu-card-name">上汤娃娃菜</h3><p class="menu-card-desc">高汤浸煮，清甜爽口，搭配枸杞点缀</p><p class="menu-card-price">¥42</p></div></div><div class="menu-card fade-in"><div class="menu-card-image">🍤</div><div class="menu-card-body"><h3 class="menu-card-name">蒜蓉开背虾</h3><p class="menu-card-desc">鲜活大虾开背去线，金银蒜蓉激发出鲜香</p><p class="menu-card-price">¥98</p></div></div><div class="menu-card fade-in"><div class="menu-card-image">🍲</div><div class="menu-card-body"><h3 class="menu-card-name">老火靓汤</h3><p class="menu-card-desc">每日现煲，排骨玉米胡萝卜，暖心暖胃</p><p class="menu-card-price">¥36</p></div></div><div class="menu-card fade-in"><div class="menu-card-image">🍰</div><div class="menu-card-body"><h3 class="menu-card-name">桂花酒酿圆子</h3><p class="menu-card-desc">手工搓制糯米圆子，桂花酒酿甜汤收尾</p><p class="menu-card-price">¥28</p></div></div></div></div></section>
+<section class="contact section-padding" id="contact"><div class="container"><h2 class="section-title fade-in">联系我们</h2><p class="section-subtitle fade-in">期待您的光临</p><div class="contact-grid fade-in"><div class="contact-card"><div class="contact-icon">📍</div><h3>餐厅地址</h3><p>上海市静安区南京西路 1288 号<br>味庐餐厅 2 层</p></div><div class="contact-card"><div class="contact-icon">📞</div><h3>预约电话</h3><p>021-6288-8888<br>每日 10:00 - 21:00</p></div><div class="contact-card"><div class="contact-icon">🕐</div><h3>营业时间</h3><p>午餐 11:00 - 14:00<br>晚餐 17:00 - 21:30</p></div></div></div></section>
+<footer class="footer"><p class="footer-brand">味 庐</p><p>&copy; 2015 - 2026 味庐餐厅 · 用心做好每一餐</p></footer>
+<script>(function(){var n=document.querySelector(".navbar");function o(){n.classList.toggle("scrolled",window.scrollY>60)}window.addEventListener("scroll",o,{passive:true});o();var h=document.querySelector(".hamburger"),l=document.querySelector(".nav-links");h.addEventListener("click",function(){l.classList.toggle("active")});l.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){l.classList.remove("active")})});var f=document.querySelectorAll(".fade-in");if("IntersectionObserver" in window){var ob=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add("visible");ob.unobserve(x.target)}})},{threshold:.15,rootMargin:"0px 0px -40px 0px"});f.forEach(function(el){ob.observe(el)})}else{f.forEach(function(el){el.classList.add("visible")})}})();</script>
+</body>
+</html>
